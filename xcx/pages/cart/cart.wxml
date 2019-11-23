@@ -1,0 +1,88 @@
+<!--pages/cart/cart.wxml-->
+<scroll-view style='height:100vh'>
+
+  <!-- 编辑和完成的切换 -->
+  <view class='top' style='height:8vh'>
+    <text wx:if="{{!isEdit}}" class='edit-btn' bindtap='editFun'>编辑</text>
+    <text wx:else class='edit-btn' bindtap='editFun'>完成</text>
+  </view>
+
+  <scroll-view scroll-y class='list' style='height:82vh'>
+    <!-- 展示购物车数据 -->
+    <view class='item' wx:if="{{!isEdit}}" wx:for="{{model}}" wx:key="{{index}}">
+      <!-- 选择与不选择的图标 -->
+      <view class='label' bindtap="labelFun" data-id="{{item._id}}">
+        <image wx:if="{{item.select}}" src='/images/choice_y.png'></image>
+        <image wx:else src='/images/choice_n.png'></image>
+      </view>
+      <!-- 点击跳转 -->
+      <navigator class='content' hover-class="none" url="/pages/detail/detail?id={{item._id}}">
+        <image src='{{item.image}}'></image>
+        <view class='text'>
+
+          <view class='title'>{{item.name}}</view>
+
+          <view class='price'>
+            <text>¥{{item.price}}</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+
+    <!-- 编辑状态 -->
+    <view class='item edit' wx:if="{{isEdit}}" wx:for="{{model}}" wx:key="{{index}}">
+
+      <view class='label' bindtap="labelFun" data-id="{{item._id}}">
+        <image wx:if="{{item.select}}" src='/images/choice_y.png'></image>
+        <image wx:else src='/images/choice_n.png'></image>
+      </view>
+
+      <view class='content'>
+        <image src="{{item.image}}"></image>
+        <view class='text'>
+          <view>
+            {{item.name}}
+          </view>
+          <view class='spec'>{{item.spec}}</view>
+
+          <view class='price'>
+            <text>¥{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class='del-btn' bindtap='delFun'>
+        删除
+      </view>
+    </view>
+
+  </scroll-view>
+  <!-- 底部 -->
+  <view class='bottom' style='height:10vh'>
+    <view class='left'>
+      <view class='text'>
+      <!-- 图片切换 -->
+        <view class='label' style='padding-left:16px;' bindtap='totalFun'>
+          <image wx:if="{{total}}" src='/images/choice_y.png'></image>
+          <image wx:else src='/images/choice_n.png'></image>
+        </view>
+        
+        <text style='padding-left:10px;'>全选</text>
+      </view>
+      <!-- 非编辑状态显示 -->
+      <view class='total-price' wx:if="{{!isEdit}}">
+        合计:
+        <text style='color:#ff5f19;margin-right:10px;'>￥{{totalPrice}}</text>
+        <view style='font-size: 10px;margin-right:10px;'>不含运费</view>
+      </view>
+    </view>
+    <!-- 结算删除的切换 -->
+    <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="closeFun" wx:if="{{!isEdit}}">
+      结算
+    </view>
+    
+    <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="delFun" wx:if="{{isEdit}}">
+      删除
+    </view>
+  </view>
+</scroll-view>

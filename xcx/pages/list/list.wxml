@@ -1,0 +1,19 @@
+<!--pages/list/list.wxml-->
+<scroll-view style='height:100vh;'>
+  <scroll-view scroll-y style='height:100%;'>
+    <view class='list'>
+      <view class='item' wx:for="{{model}}" wx:key="{{index}}">
+        <navigator hover-class="none" url="/pages/detail/detail?id={{item._id}}">
+          <image class='product' src='{{item.image}}'></image>
+          <text class='text'>{{item.name}}.</text>
+        </navigator>
+        <view class='price'>
+          <text>￥{{item.price}}</text>
+          <!-- <view bindtap='addCart' data-item="{{item}}">
+            <image src='/images/Shopping.png'></image>
+          </view> -->
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</scroll-view>

@@ -1,0 +1,69 @@
+<!--pages/buydetail/buydetail.wxml-->
+<view style='height:100vh'>
+  <scroll-view scroll-y style='height:92vh'>
+    <view class='title'>
+      <view class='left'>
+        购物清单
+      </view>
+    </view>
+    <view class='list'>
+      <view class='item1' wx:if="{{!isEdit}}" wx:for="{{data.goods}}" wx:key="{{index}}">
+        <navigator class='content' hover-class="none" url="/pages/details/index?id=1">
+          <image src='{{item.img}}'></image>
+          <view class='text'>
+            <view class='name'>{{item.title}}</view>
+            <view class='price1'>
+              <text>¥{{item.price}}</text>
+              <text>x{{item.num}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class='title'>
+      <view class='left'>
+        收货地址
+      </view>
+    </view>
+
+    <navigator hover-class="none" url="/pages/addresslist/addresslist?type=1" class='address'>
+      <view class='left'>
+        <view>{{address.tel}} {{address.who}} 收</view>
+        <view>{{address.where[0]}} {{address.where[1]}} {{address.where[2]}} {{address.detail}}</view>
+      </view>
+      <view class='choice'>
+        <image style='width:8px;height:15px;' src='/images/my_order.png'></image>
+      </view>
+    </navigator>
+
+    <view class='title'>
+      <view class='left'>
+        商品价格
+      </view>
+      <view class='right'>
+        <text>{{list.price}}</text>
+      </view>
+    </view>
+
+    <view class='title price'>
+      <view class='left '>
+        运费
+      </view>
+      <view class='right'>
+        <text>{{list.freight}}</text>
+      </view>
+    </view>
+
+    <view class='title price'>
+      <view class='left'>
+        总价
+      </view>
+      <view class='right'>
+        <text>{{totalPrice}}</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class='btn' bindtap="tip">
+    支付
+  </view>
+</view>

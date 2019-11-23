@@ -1,0 +1,52 @@
+<!--pages/home/home.wxml-->
+<scroll-view class="container" scroll-y>
+<!-- 轮播图 -->
+  <swiper autoplay circular>
+    <block wx:for="{{model}}" wx:key="{{index}}">
+      <swiper-item>
+        <image src='{{item.image}}' style='width:100%;height:220px;' />
+      </swiper-item>
+    </block>
+  </swiper>
+<!-- 分类 -->
+  <view class='icon'>
+    <navigator hover-class="none" url="/pages/list/list?radio=1">
+      <image src='/images/1.png' mode="aspectFit"></image>
+      <text>海报</text>
+    </navigator>
+    <navigator hover-class="none" url="/pages/list/list?radio=2">
+      <image src='/images/3.png' mode="aspectFit"></image>
+      <text>周边</text>
+    </navigator>
+    <navigator hover-class="none" url="/pages/list/list?radio=3">
+      <image src='/images/4.png' mode="aspectFit"></image>
+      <text>礼品</text>
+    </navigator>
+    <navigator hover-class="none" url="/pages/list/list?radio=4">
+      <image src='/images/2.png' mode="aspectFit"></image>
+      <text>购票</text>
+    </navigator>
+  </view>
+  <view class='title'>
+    <text class='cn'>猜你喜欢</text>
+    <text class='en'>Lovely</text>
+  </view>
+
+<!-- 推荐商品 -->
+  <view class='list'>
+    <view class='item' wx:for="{{model}}" wx:key="{{index}}">
+
+      <navigator hover-class="none" url="/pages/detail/detail?id={{item._id}}">
+        <image class='product' src='{{item.image}}'></image>
+        <text class='text'>{{item.name}}</text>
+      </navigator>
+
+      <view class='price'>
+        <text>￥{{item.price}}</text>
+
+      </view>
+    </view>
+  </view>
+  <dialog   id='dialog' title='登录提示' content='小程序需要您的授权才能提供更好的服务哦' confirmText='知道了' bind:confirmEvent='confirmEvent' bind:bindGetUserInfo='bindGetUserInfo'>
+  </dialog>
+</scroll-view>

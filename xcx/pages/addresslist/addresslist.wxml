@@ -1,0 +1,26 @@
+<!--pages/addresslist/addresslist.wxml-->
+<view style='height:100vh;'>
+  <scroll-view scroll-y style='height:92vh;'>
+    <view class='list'>
+      <view class='item' wx:for="{{list}}" wx:key="{{index}}">
+        <view class='left'>
+          <view>{{item.tel}} {{item.who}} 收</view>
+          <view>{{item.where[0]}} {{item.where[1]}} {{item.where[2]}} {{item.detail}}</view>
+        </view>
+        <navigator hover-class="none" url="/pages/addaddress/addaddress?where={{item.where[0]}},{{item.where[1]}},{{item.where[2]}}&tel={{item.tel}}&who={{item.who}}&detail={{item.detail}}&time={{item.time}}" class='edit'>
+          <image src='/images/edit.png'></image>
+        </navigator>
+        <view class='choice'  bindtap='defaultFun' data-time="{{item.time}}">
+          <image wx:if="{{!item.select}}" src='/images/choice_n.png'></image>
+          <image wx:else src='/images/choice_y.png'></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <navigator wx:if="{{flag}}" url="/pages/addaddress/addaddress" class='btn'>
+    新增收货地址
+  </navigator>
+  <view wx:else class='btn' bindtap='deleteaddress'>
+    删除
+  </view>
+</view>

@@ -1,0 +1,103 @@
+<!--pages/detail/detail.wxml-->
+<view style='height:100vh;'>
+  <scroll-view scroll-y style='height:92vh'>
+    <swiper>
+
+      <swiper-item>
+        <image src='{{model.image}}' style='height:40vh;width:100%' />
+      </swiper-item>
+
+    </swiper>
+
+    <view class='title'>
+      <view class='spec'>
+        {{model.name}}
+      </view>
+    </view>
+
+    <view class='price'>
+      <text>￥{{model.price}}</text>
+    </view>
+
+    <view class='freight'>
+      <view class='left'>
+        运费:{{model.freight}}
+      </view>
+    </view>
+
+    <view class='tab'>
+
+      <view class='left' bindtap="tabFun" data-state="{{1}}">
+        <text class='{{tabIs?"tab-acitve":""}}'>产品详情</text>
+      </view>
+
+      <view class='right' bindtap="tabFun" data-state="{{2}}">
+        <text class='{{!tabIs?"tab-acitve":""}}'>售后保障</text>
+      </view>
+
+    </view>
+    <view class='content' wx:if="{{tabIs}}">
+      {{model.content}}
+    </view>
+    <view class='content' wx:if="{{!tabIs}}">
+     {{model.buyend}}
+    </view>
+  </scroll-view>
+  <view class='bottom'>
+    <!-- 点击跳转到购物车 -->
+    <view class='icon' bindtap='goShopCar'>
+      <image src='/images/shopping_cart_return.png' style='width:20px;height:17px;'></image>
+      <text>购物车</text>
+    </view>
+
+    <view class='btn' bindtap='addCart'>
+      加入购物车
+    </view>
+
+    <view class='btn' style='background: #FE4543;' bindtap='specFun'>
+      立即购买
+    </view>
+  </view>
+  <view class='popup' wx:if="{{specIs}}">
+    <view class='title'>
+      <!-- 商品图 -->
+      <view class='img'>
+        <image src='{{model.image}}'></image>
+      </view>
+      <!-- 价钱和内容 -->
+      <view class='text'>
+        <text>{{model.content}}</text>
+        <view>{{model.price}}￥</view>
+      </view>
+      <!-- 关闭 -->
+      <view class='icon' bindtap='specFun'>
+        <image src="/images/delete.png"></image>
+      </view>
+
+    </view>
+
+    <scroll-view scroll-y class='content'>
+
+      <view class='item'>
+        <text style='padding-top:10px;'>款式:</text>
+        <view class='list'>
+
+        </view>
+      </view>
+
+      <view class='item'>
+        <text>搭配套餐:</text>
+        <view class='list'>
+
+        </view>
+      </view>
+
+    </scroll-view>
+    <navigator url="/pages/buydetail/buydetail?id={{model._id}}" class='btn' bindtap='specFun'>
+      下一步
+    </navigator>
+    <!-- <view class='btn' bindtap='specFun'>
+      立刻支付
+    </view> -->
+  </view>
+</view>
