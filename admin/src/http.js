@@ -3,7 +3,6 @@ import Vue from 'vue'
 import router from './router'
 const http = axios.create({
     // baseURL: 'http://localhost:3001/api'
-    baseURL: 'http://139.155.12.117:3333/api'
 
 })
 http.interceptors.request.use(function (config) {
